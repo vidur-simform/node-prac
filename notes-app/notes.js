@@ -7,7 +7,8 @@ const addNote = (title, body) => {
 
     //duplicate title not allowed
     const dup = notes.find(note => title === note.title);
-    debugger
+
+    // debugger
     if (!dup) {
         notes.push({ title, body });
         saveNotes(notes);
