@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <%- include('../includes/navigation.ejs') %>
+        <div class="cont">
+
+            <h1>
+                <% if(editing){ %> EDIT PRODUCT <% } else { %> ADD PRODUCT <% } %>
+            </h1>
+            <form class="form1" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>"
+                method="POST">
+                <div class="form-group">
+                    <label for="product-name">Product Name</label>
+                    <input type="text" name="name" class="form-control" id="product-name"
+                        placeholder="Enter name of product..." value="<% if(editing){%> <%=product.name %> <%} %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Product Image Url</label>
+                    <input type="text" name="imageUrl" class="form-control" id="product-image"
+                        placeholder="Enter url for image..." value="<% if(editing){%> <%=product.imageUrl %> <%} %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Product Price</label>
+                    <input type="text" name="price" class="form-control" id="product-price"
+                        placeholder="Enter price of product..." value="<% if(editing){%> <%=product.price %> <%} %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Product Description</label>
+                    <input type="text" name="description" class="form-control" id="product-description"
+                        placeholder="Enter description of product..." value="<% if(editing){%> <%=product.description %> <%} %>" required>
+                </div>
+                <center><button type="submit" id="add-btn" class="btn btn-lg btn-primary">Submit</button></center>
+                <br>
+            </form>
+        </div>
+
+        <%- include('../includes/end.ejs') %>
