@@ -27,7 +27,7 @@ module.exports = class Product {
     save() {
         getDataFromFile((products)=>{
             if(this.id){
-                const ind = products.find((p)=>this.id===p.id);
+                const ind = products.findIndex((p)=>this.id===p.id);
                 products[ind] = this;
 
             }else{
@@ -40,9 +40,6 @@ module.exports = class Product {
                 }
             });
         })
-    }
-    static findById(id) {
-        
     }
     static deleteById(id) {
         getDataFromFile((products)=>{
