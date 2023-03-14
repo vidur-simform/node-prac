@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 
 const bodyParser = require('body-parser');
+const sequelize = require('./utils/databaseSequelize');
 
 const app = express();
 
@@ -21,6 +22,11 @@ app.get('/',homeController.getHome);
 
 //invalid path request
 app.use(errorController.get404);
+
+sequelize
+.sync()
+.then();
+
 
 app.listen(3000,()=>{
     console.log("Server started...")
