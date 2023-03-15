@@ -4,30 +4,75 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./utils/databaseSequelize');
 
+//importing models
+const User = require('./models/user');
+const Product = require('./models/product');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //configuring view engine and path 
-app.set('view engine','ejs');
-app.set('views','views');
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 const errorController = require('./controllers/error');
 const homeController = require('./controllers/home');
 
-app.use('/admin', adminRoutes); 
-app.get('/',homeController.getHome);
+app.use((req, res, next) => {
+    User.findById(1)
+        .then(user => {
+            req.body.user = user;    //adding dummy user to request
+            next();
+        })
+        .catch(err => console.log(err));
+});
+
+app.use('/admin', adminRoutes);
+app.use('/shop', shopRoutes);
+app.get('/', homeController.getHome);
 
 //invalid path request
 app.use(errorController.get404);
 
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+
+
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
+
 sequelize
-.sync()
-.then();
-
-
-app.listen(3000,()=>{
-    console.log("Server started...")
-});
+    .sync()
+    .then(result => {
+        return User.findById(1);
+    })
+    .then(user => {
+        if (!user) {
+            return User.create({ name: 'user1', email: 'user1@abc.com' }); //dummy user
+        }
+        return user;
+    })
+    .then(user => {
+        // console.log(user);
+        return user.createCart();
+    })
+    .then(cart => {
+        app.listen(3000, () => {
+            console.log("Server started...");
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });

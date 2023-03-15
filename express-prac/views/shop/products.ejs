@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+    <%- include('../includes/navigation.ejs') %>
+
+        <div class="cont">
+            <h1>PRODUCTS</h1>
+
+            <div class="card-deck">
+                <% for (let product of products) { %>
+                    <div class="card">
+                        <img class="card-img-top" src="<%= product.imageUrl %>" alt="Card image cap">
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <%= product.name %>
+                            </h2>
+                            <h5 class="card-title" style="font-weight:370;">
+                                <%= product.price %> ₹
+                            </h5>
+                            <p class="card-text" style="font-weight:330;">
+                                <%= product.description %>
+                            </p><hr>
+                            <center><form class="add-to-cart-form" action="/shop/add-to-cart" method="POST">
+                                <input type="hidden" value="<%= product.id %>" name="productId">
+                                <button type="submit" class="btn btn-outline-primary"> Add To Cart </button>
+                            </form>
+                        </center>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <%- include('../includes/end.ejs') %>

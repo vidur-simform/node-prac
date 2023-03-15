@@ -10,10 +10,16 @@
                     <a class="nav-link <%= path === 'home' ? 'active' : '' %>" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%= path === 'add-product' ? 'active' : '' %>" href="/admin/add-product">Add-Product</a>
+                    <a class="nav-link <%= path === 'products' ? 'active' : '' %>" href="/shop/products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%= path === 'list-products' ? 'active' : '' %>" href="/admin/products">List-Products</a>
+                    <a class="nav-link <%= path === 'cart' ? 'active' : '' %>" href="/shop/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === 'add-product' ? 'active' : '' %>" href="/admin/add-product">Admin-Add-Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === 'list-products' ? 'active' : '' %>" href="/admin/products">Admin-List-Products</a>
                 </li>
             </ul>
         </div>

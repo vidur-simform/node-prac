@@ -2,9 +2,7 @@
     <%- include('../includes/navigation.ejs') %>
 
         <div class="cont">
-            <h1>PRODUCT LIST ADMIN</h1>
-
-
+            <h1>CART</h1>
             <table class="table table-bordered table1">
                 <thead>
                     <tr>
@@ -12,7 +10,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Quantity</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -30,11 +28,10 @@
                                 <%= product.price %>
                             </td>
                             <td>
-                                <%= product.description %>
+                                <%= product.cartitem.quantity %>
                             </td>
                             <td>
-                                <a href="/admin/edit-product/<%= product.id %>"  class="btn btn-primary "> Update </a>
-                                <form class="delete-form" action="/admin/delete-product" method="POST">
+                                <form  action="/shop/delete-from-cart" method="POST">
                                     <input type="hidden" value="<%= product.id %>" name="productId">
                                     <button type="submit" class="btn btn-danger"> Delete </button>
                                 </form>

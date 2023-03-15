@@ -85,3 +85,18 @@
 .delete-form{
     display: inline;
 }
+.card{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 2%;
+    margin: 1%;
+}
+.card-img-top{
+    height: 180px;
+    width: 270px;
+}
+.card-deck{
+    display: flex;
+    padding: 2%;
+    flex-wrap: wrap ;
+    justify-content: center;
+}
