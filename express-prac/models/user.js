@@ -27,7 +27,9 @@ const userSchema = new Schema({
 
 userSchema.methods.addToCart = function(product){
     //finding index of already product in cart
-    const ind = this.cart.items.findIndex(p => p.productId==product._id);
+    const ind = this.cart.items.findIndex(p => p.productId.toString()==product._id.toString());
+    console.log("p_id",product._id);
+    console.log(this.cart.items);
     if(ind >= 0){
         this.cart.items[ind].quantity++;
     }else{

@@ -49,7 +49,7 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-  const id = Number(req.body.productId);
+  const id = req.body.productId;
   const name = req.body.name;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
@@ -81,13 +81,13 @@ exports.postDeleteProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.find().then((products) => {
-    res
-      .render("admin/list-products", {
+  Product.find()
+    .then((products) => {
+      res.render("admin/list-products", {
         path: "list-products",
         products: products,
         pageTitle: "Admin Product List",
-      })
-      .catch((err) => console.log(err));
-  });
+      });
+    })
+    .catch((err) => console.log(err));
 };

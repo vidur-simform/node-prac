@@ -17,14 +17,13 @@ exports.getProducts = (req, res, next) => {
 exports.getCart = (req, res, next) => {
     req.body.user
         .populate('cart.items.productId')
-        .execPopulate()
         .then(user => {
             const prods = user.cart.items.map((ele) => {
                 return {
-                    _id: ele.prodId._id,
-                    name: ele.prodId.name,
-                    imageUrl: ele.prodId.imageUrl,
-                    price: ele.prodId.price,
+                    _id: ele.productId._id,
+                    name: ele.productId.name,
+                    imageUrl: ele.productId.imageUrl,
+                    price: ele.productId.price,
                     quantity: ele.quantity
                 };
             });
@@ -42,7 +41,7 @@ exports.addToCart = (req, res, next) => {
     const prodId = req.body.productId;
     Product.findById(prodId)
         .then(product => {
-            return req.user.addToCart(product);
+            return req.body.user.addToCart(product);
         })
         .then(result => {
             console.log(result);

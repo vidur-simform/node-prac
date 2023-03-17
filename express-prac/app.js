@@ -22,7 +22,7 @@ const errorController = require("./controllers/error");
 const homeController = require("./controllers/home");
 
 app.use((req, res, next) => {
-    User.findById(1)
+    User.findById("6414a641de2c520c5407ea9a")
         .then((user) => {
             req.body.user = user; //adding dummy user to request
             next();
@@ -39,9 +39,8 @@ app.use(errorController.get404);
 
 
 mongoose
-    .connect(
-        "mongodb+srv://vidur:Vidur_Atlas012@cluster0.io1qt3s.mongodb.net/shop?retryWrites=true&w=majority"
-    )
+    .connect("mongodb+srv://vidur:Vidur_Atlas012@cluster0.io1qt3s.mongodb.net/shop?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         User.findOne().then((user) => {
             if (!user) {

@@ -95,6 +95,7 @@
     width: 270px;
 }
 .card-deck{
+    width: 95%;
     display: flex;
     padding: 2%;
     flex-wrap: wrap ;
