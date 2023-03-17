@@ -1,16 +1,50 @@
-const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
 
-const sequelize = require('../utils/databaseSequelize');
+const Schema = mongoose.Schema;
 
-const User = sequelize.define('user', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
-    name: Sequelize.STRING,
-    email: Sequelize.STRING
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  cart: {
+    items: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Product',
+          required: true
+        },
+        quantity: { type: Number, required: true }
+      }
+    ]
+  }
 });
 
-module.exports = User;
+userSchema.methods.addToCart = function(product){
+    //finding index of already product in cart
+    const ind = this.cart.items.findIndex(p => p.productId==product._id);
+    if(ind >= 0){
+        this.cart.items[ind].quantity++;
+    }else{
+        this.cart.items.push({
+            productId: product._id,
+            quantity: 1
+        });
+    }
+    return this.save();
+};
+
+userSchema.methods.removeFromCart = function(productId) {
+    const updatedCartItems = this.cart.items.filter(item => {
+      return item.productId.toString() !== productId.toString();
+    });
+    this.cart.items = updatedCartItems;
+    return this.save();
+};
+
+module.exports = mongoose.model('User', userSchema);

@@ -18,7 +18,7 @@
                     <% for (let product of products) { %>
                         <tr>
                             <th scope="row">
-                                <%= product.id %>
+                                <%= product._id %>
                             </th>
                             <td>
                                 <%= product.name %>
@@ -28,11 +28,11 @@
                                 <%= product.price %>
                             </td>
                             <td>
-                                <%= product.cartitem.quantity %>
+                                <%= product.quantity %>
                             </td>
                             <td>
                                 <form  action="/shop/delete-from-cart" method="POST">
-                                    <input type="hidden" value="<%= product.id %>" name="productId">
+                                    <input type="hidden" value="<%= product._id %>" name="productId">
                                     <button type="submit" class="btn btn-danger"> Delete </button>
                                 </form>
                             </td>

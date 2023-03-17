@@ -28,7 +28,7 @@
                         placeholder="Enter description of product..." value="<% if(editing){%><%=product.description%><%}%>" required>
                 </div>
                 <% if (editing) { %>
-                    <input type="hidden" value="<%= product.id %>" name="productId">
+                    <input type="hidden" value="<%= product._id %>" name="productId">
                 <% } %>
                 <center><button type="submit" id="add-btn" class="btn btn-lg btn-primary">Submit</button></center>
                 <br>

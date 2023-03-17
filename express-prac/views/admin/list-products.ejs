@@ -20,7 +20,7 @@
                     <% for (let product of products) { %>
                         <tr>
                             <th scope="row">
-                                <%= product.id %>
+                                <%= product._id %>
                             </th>
                             <td>
                                 <%= product.name %>
@@ -33,9 +33,9 @@
                                 <%= product.description %>
                             </td>
                             <td>
-                                <a href="/admin/edit-product/<%= product.id %>"  class="btn btn-primary "> Update </a>
+                                <a href="/admin/edit-product/<%= product._id %>"  class="btn btn-primary "> Update </a>
                                 <form class="delete-form" action="/admin/delete-product" method="POST">
-                                    <input type="hidden" value="<%= product.id %>" name="productId">
+                                    <input type="hidden" value="<%= product._id %>" name="productId">
                                     <button type="submit" class="btn btn-danger"> Delete </button>
                                 </form>
                             </td>

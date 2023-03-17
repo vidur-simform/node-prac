@@ -1,4 +1,3 @@
-const { findById } = require("../models/product");
 const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
@@ -9,12 +8,33 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
+exports.postAddProduct = (req, res, next) => {
+  const name = req.body.name;
+  const imageUrl = req.body.imageUrl;
+  const price = req.body.price;
+  const description = req.body.description;
+  const user = req.body.user;
+  const product = new Product({
+    name,
+    imageUrl,
+    price,
+    description,
+    userId: user
+  });
+  product.save()
+    .then((result) => {
+      console.log("PRODUCT CREATED");
+      res.redirect("/admin/products");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 exports.getEditProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  req.body.user
-    .getProducts({ where: { id: prodId } })
-    .then((products) => {
-      const product = products[0];
+  Product.findById(prodId)
+    .then((product) => {
       if (!product) {
         return res.redirect("/");
       }
@@ -49,35 +69,11 @@ exports.postEditProduct = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.postAddProduct = (req, res, next) => {
-  const name = req.body.name;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
-  const description = req.body.description;
-  const user = req.body.user;
-  user
-    .createProduct({
-      name,
-      imageUrl,
-      price,
-      description,
-    })
-    .then((result) => {
-      console.log("PRODUCT CREATED");
-      res.redirect("/admin/products");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findById(prodId)
-    .then((product) => {
-      return product.destroy();
-    })
-    .then((result) => {
+  Product.findByIdAndDelete(prodId)
+    .then(() => {
       console.log("PRODUCT DELETED!");
       res.redirect("/admin/products");
     })
@@ -85,7 +81,7 @@ exports.postDeleteProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  req.body.user.getProducts().then((products) => {
+  Product.find().then((products) => {
     res
       .render("admin/list-products", {
         path: "list-products",
