@@ -57,4 +57,4 @@ exports.postCartDeleteProduct = (req, res, next) => {
             res.redirect('/shop/cart');
         })
         .catch(err => console.log(err));
-};
+}; 
