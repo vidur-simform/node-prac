@@ -2,11 +2,12 @@ const express = require('express');
 
 const router = express.Router();
 const shopController = require('../controllers/shop');
+const isAuth = require('../middleware/isAuth');
 
 router.get('/products',shopController.getProducts);
-router.get('/cart',shopController.getCart);
-router.post('/add-to-cart',shopController.addToCart);
-router.post('/delete-from-cart',shopController.postCartDeleteProduct);
+router.get('/cart', isAuth, shopController.getCart);
+router.post('/add-to-cart', isAuth, shopController.addToCart);
+router.post('/delete-from-cart', isAuth, shopController.postCartDeleteProduct);
 
 
 
