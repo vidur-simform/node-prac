@@ -101,6 +101,7 @@
     flex-wrap: wrap ;
     justify-content: center;
 }
+
 .user-message {
     margin: auto;
     width: 90%;
@@ -115,4 +116,8 @@
     border-color: red;
     background: rgb(255, 176, 176);
     color: red;
+  }
+  .btn-link{
+    margin-top: 2px;
+    border: none;
   }

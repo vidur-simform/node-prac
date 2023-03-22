@@ -32,6 +32,7 @@
                             </td>
                             <td>
                                 <form  action="/shop/delete-from-cart" method="POST">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                                     <input type="hidden" value="<%= product._id %>" name="productId">
                                     <button type="submit" class="btn btn-danger"> Delete </button>
                                 </form>

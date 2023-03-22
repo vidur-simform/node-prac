@@ -15,7 +15,7 @@ router.post(
         body('email')
             .isEmail()
             .withMessage('Please enter valid email address.')
-            .normalizeEmail(),
+           ,
         body('password', 'Password has to be valid.')
             .isLength({ min: 5 })
             .isAlphanumeric()
@@ -34,8 +34,7 @@ router.post(
                         return Promise.reject('Email is already in use...');
                     }
                 });
-            })
-            .normalizeEmail(),
+            }),
         body(
             'password',
             'Please enter a password with only numbers and text and at least 5 characters.'
@@ -54,5 +53,7 @@ router.post(
 
     ],
     authController.postSignup);
+    
+    router.post('/logout', authController.postLogout);
 
 module.exports = router;

@@ -12,15 +12,32 @@
                 <li class="nav-item">
                     <a class="nav-link <%= path === 'products' ? 'active' : '' %>" href="/shop/products">Products</a>
                 </li>
+                <% if (!isAuthenticated) { %>
                 <li class="nav-item">
-                    <a class="nav-link <%= path === 'cart' ? 'active' : '' %>" href="/shop/cart">Cart</a>
+                    <a class="nav-link <%= path === '/signin' ? 'active' : '' %>" href="/auth/signin">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%= path === 'add-product' ? 'active' : '' %>" href="/admin/add-product">Admin-Add-Product</a>
+                    <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/auth/signup">Signup</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= path === 'list-products' ? 'active' : '' %>" href="/admin/products">Admin-List-Products</a>
-                </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === 'cart' ? 'active' : '' %>" href="/shop/cart">Cart</a>
+                    </li>
+                    <% if(isAdmin) {%>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === 'add-product' ? 'active' : '' %>" href="/admin/add-product">Admin-Add-Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === 'list-products' ? 'active' : '' %>" href="/admin/products">Admin-List-Products</a>
+                    </li>
+                    <% }%>
+                    <li class="nav-item">
+                        <form action="/auth/logout" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn-link nav-link" type="submit">Logout</button>
+                        </form>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </div>

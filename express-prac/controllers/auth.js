@@ -67,6 +67,10 @@ exports.postSignin = (req, res, next) => {
       if(isMatched){
         req.session.isLoggedIn = true;
         req.session.user = user;
+        req.session.iaAdmin = false;
+        if(req.body.email == 'admin@abc.com'){
+          req.session.isAdmin = true;
+        }
         return req.session.save(err => {
           if(err)
             console.log(err);
@@ -133,4 +137,12 @@ exports.postSignup = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
+};
+
+exports.postLogout = (req,res,next)=>{
+  req.session.destroy(err => {
+    if(err)
+      console.log(err);
+    res.redirect('/');
+  });
 };

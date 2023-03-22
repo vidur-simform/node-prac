@@ -35,6 +35,7 @@ app.use(flash());
 app.use((req, res, next) => {
     //locals means passed in views
     res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.isAdmin = req.session.isAdmin;
     res.locals.csrfToken = req.csrfToken();
     next();
 });
@@ -81,15 +82,16 @@ app.get("/", homeController.getHome);
 app.use(errorController.get404);
 
 //middleware for error handling
-// app.use((error, req, res, next) => {
-//     // res.status(error.httpStatusCode).render(...);
-//     // res.redirect('/500');
-//     res.status(500).render('500', {
-//       pageTitle: 'Error!',
-//       path: '/500',
-//       isAuthenticated: req.session.isLoggedIn
-//     });
-//   });
+app.use((error, req, res, next) => {
+    // res.status(error.httpStatusCode).render(...);
+    // res.redirect('/500');
+    console.log(error);
+    res.status(500).render('500', {
+      pageTitle: 'Error!',
+      path: '/500',
+      isAuthenticated: req.session.isLoggedIn
+    });
+  });
 
 mongoose
     .connect(process.env.MONGODB_URI,
