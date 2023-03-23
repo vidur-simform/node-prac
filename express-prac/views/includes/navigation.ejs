@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link <%= path === 'cart' ? 'active' : '' %>" href="/shop/cart">Cart</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/shop/orders">Orders</a>
+                    </li>
                     <% if(isAdmin) {%>
                     <li class="nav-item">
                         <a class="nav-link <%= path === 'add-product' ? 'active' : '' %>" href="/admin/add-product">Admin-Add-Product</a>

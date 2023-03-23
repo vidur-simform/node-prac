@@ -6,7 +6,6 @@
             <table class="table table-bordered table1">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
@@ -17,9 +16,6 @@
                 <tbody>
                     <% for (let product of products) { %>
                         <tr>
-                            <th scope="row">
-                                <%= product._id %>
-                            </th>
                             <td>
                                 <%= product.name %>
                             </td>
@@ -31,7 +27,7 @@
                                 <%= product.quantity %>
                             </td>
                             <td>
-                                <form  action="/shop/delete-from-cart" method="POST">
+                                <form action="/shop/delete-from-cart" method="POST">
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                                     <input type="hidden" value="<%= product._id %>" name="productId">
                                     <button type="submit" class="btn btn-danger"> Delete </button>
@@ -41,5 +37,14 @@
                         <% } %>
                 </tbody>
             </table>
+            <hr>
+            <center>
+                <div>
+                    <form action="/shop/create-order" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit" class="btn btn-primary">Order Now!</button>
+                    </form>
+                </div>
+            </center>
         </div>
         <%- include('../includes/end.ejs') %>

@@ -30,8 +30,6 @@ const userSchema = new Schema({
 userSchema.methods.addToCart = function(product){
     //finding index of already product in cart
     const ind = this.cart.items.findIndex(p => p.productId.toString()==product._id.toString());
-    console.log("p_id",product._id);
-    console.log(this.cart.items);
     if(ind >= 0){
         this.cart.items[ind].quantity++;
     }else{
@@ -49,6 +47,10 @@ userSchema.methods.removeFromCart = function(productId) {
     });
     this.cart.items = updatedCartItems;
     return this.save();
+};
+userSchema.methods.clearCart = function() {
+  this.cart = { items: [] };
+  return this.save();
 };
 
 module.exports = mongoose.model('User', userSchema);
