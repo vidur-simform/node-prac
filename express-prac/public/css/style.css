@@ -1,0 +1,137 @@
+/* add html */
+.cont{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.form1{
+    width: 40vw;
+    background-color: rgba(64, 194, 220, 0.7);
+    border-radius: 7px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.form-group{
+    margin: 10px;
+}
+.form-group label{
+    font-size:x-large;
+}
+/* nav */
+.nav-item a{
+    font-size: larger;
+}
+.nav-item a.active{
+    background-color: rgba(180,180,180,0.7);
+}
+
+/* list */
+.table1{
+    width: 80%;
+    font-size: large;
+    background-color: rgba(206, 243, 251, 0.7);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.image-of-product{
+    width: 90px;
+    height: 60px;
+    margin: 3px;
+}
+.sort-select{
+    padding: 5px;
+    border: 2px solid #54B4D3;
+    color: #54B4D3;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+}
+.sort-select{
+    outline: none;
+}
+.sort-select{
+    outline: none;
+}
+#filter-by-id{
+    padding: 5px;
+    border: 2px solid #54B4D3;
+    color :#54B4D3;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+}
+#filter-by-id:focus{
+    outline: none;
+}
+#filter-by-id::placeholder { 
+    color: #54B4D3;
+ }
+ .add-prod{
+    color: #54B4D3;
+ }
+ .add-prod{
+    padding: 5px;
+    border: 2px solid #54B4D3;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    text-decoration: none;
+ } 
+ .add-prod:hover{
+    color: white;
+    text-decoration: none;
+    background-color: #54B4D3;
+ }
+.delete-form{
+    display: inline;
+}
+.card{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 2%;
+    margin: 1%;
+}
+.card-img-top{
+    height: 180px;
+    width: 270px;
+}
+.card-deck{
+    width: 95%;
+    display: flex;
+    padding: 2%;
+    flex-wrap: wrap ;
+    justify-content: center;
+}
+
+.user-message {
+    margin: auto;
+    width: 90%;
+    border: 1px solid #4771fa;
+    padding: 0.5rem;
+    border-radius: 3px;
+    background: #b9c9ff;
+    text-align: center;
+  }
+  
+  .user-message--error {
+    border-color: red;
+    background: rgb(255, 176, 176);
+    color: red;
+  }
+  .btn-link{
+    margin-top: 2px;
+    border: none;
+  }
+
+
+.orders__products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.orders__products-item {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #00695c;
+    color: #00695c;
+}

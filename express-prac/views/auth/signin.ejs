@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %> 
+<%- include('../includes/navigation.ejs')%>
+<div class="cont">
+  <h1>Login</h1>
+  <form class="form1" action="/auth/signin" method="POST" novalidate>
+    <% if (errorMessage) { %>
+    <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        id="email"
+        placeholder="Enter your email..."
+        value="<%= oldInput.email %>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter your password..."
+        value="<%= oldInput.password %>"
+      />
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <center>
+      <button class="btn btn-lg btn-primary" type="submit">Login</button>
+    </center>
+    <br/>
+  </form>
+</div>
+
+<%- include('../includes/end.ejs') %>

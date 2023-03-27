@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link <%= path === 'home' ? 'active' : '' %>" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === 'products' ? 'active' : '' %>" href="/shop/products">Products</a>
+                </li>
+                <% if (!isAuthenticated) { %>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === '/signin' ? 'active' : '' %>" href="/auth/signin">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/auth/signup">Signup</a>
+                </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === 'cart' ? 'active' : '' %>" href="/shop/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/shop/orders">Orders</a>
+                    </li>
+                    <% if(isAdmin) {%>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === 'add-product' ? 'active' : '' %>" href="/admin/add-product">Admin-Add-Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === 'list-products' ? 'active' : '' %>" href="/admin/products">Admin-List-Products</a>
+                    </li>
+                    <% }%>
+                    <li class="nav-item">
+                        <form action="/auth/logout" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn-link nav-link" type="submit">Logout</button>
+                        </form>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
