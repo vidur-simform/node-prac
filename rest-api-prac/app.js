@@ -7,6 +7,7 @@ dotenv.config();
 const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const multer = require('multer');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 //environmetal variable
@@ -44,7 +45,7 @@ const fileFilter = (req, file, cb) => {
 
 const app = express();
 
-app.use(express.json()); // application/json
+app.use(bodyParser.json()); // application/json
 app.use( 
     multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
@@ -60,7 +61,7 @@ app.use(errorHandler);
 
 mongoose.connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
-        app.listen(8080, () => {
+        app.listen(port, () => {
             console.log("Server started on port:", port);
         })
     })

@@ -48,6 +48,7 @@ exports.addPost = async (req,res,next) => {
     if (!errors.isEmpty()) {
         const error = new Error("Validation failed, entered post data is incorrect.");
         error.statusCode = 422;
+        error.data = errors.array();
         next(error);
         return;
     }
@@ -88,6 +89,7 @@ exports.updatePost = async (req,res,next) => {
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, entered data is incorrect.');
         error.statusCode = 422;
+        error.data = errors.array();
         next(error);
         return;
     }
@@ -110,9 +112,9 @@ exports.updatePost = async (req,res,next) => {
         }
         if (newImageUrl) {
             deleteFile(post.imageUrl);
+            post.imageUrl = newImageUrl;
         }
         post.title = title;
-        post.imageUrl = newImageUrl;
         post.content = content;
         const updatedPost = await post.save();
         res.status(200).json({
