@@ -86,6 +86,7 @@ exports.addPost = async (req,res,next) => {
 exports.updatePost = async (req,res,next) => {
     const postId = req.params.postId;
     const errors = validationResult(req);
+    const { title, content } = req.body;
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, entered data is incorrect.');
         error.statusCode = 422;
@@ -93,7 +94,6 @@ exports.updatePost = async (req,res,next) => {
         next(error);
         return;
     }
-    const { title, content } = req.body;
 
     const newImageUrl = req.file?.path; //will return undefined if file isn't present
     try {
@@ -111,7 +111,11 @@ exports.updatePost = async (req,res,next) => {
             return;
         }
         if (newImageUrl) {
-            deleteFile(post.imageUrl);
+            const errFile = deleteFile(post.imageUrl);
+            if(errFile){
+                next(errFile);
+                return;
+            }
             post.imageUrl = newImageUrl;
         }
         post.title = title;
@@ -145,7 +149,11 @@ exports.deletePost = async (req,res,next) => {
             next(error);
             return;
         }
-        deleteFile(post.imageUrl);
+        const errFile = deleteFile(post.imageUrl);
+        if(errFile){
+            next(errFile);
+            return;
+        }
         await Post.findByIdAndRemove(postId);
         const user = await User.findById(req.userId);
         user.posts.pull(postId);

@@ -49,7 +49,7 @@ exports.signin = async (req, res, next) => {
                 userId: user._id.toString()
             },
             'somesecret',
-            { expiresIn: '1h' }
+            { expiresIn: '10h' }
         );
         res.status(200).json({ token: token, userId: user._id.toString() });
     }

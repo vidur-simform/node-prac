@@ -7,8 +7,9 @@ dotenv.config();
 const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const multer = require('multer');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const helmet = require("helmet");
+const cors = require("cors");
 
 //environmetal variable
 const port = process.env.PORT;
@@ -45,13 +46,14 @@ const fileFilter = (req, file, cb) => {
 
 const app = express();
 
-app.use(bodyParser.json()); // application/json
+app.use(express.json()); // application/json
 app.use( 
     multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-
+app.use(helmet());
+app.use(cors());
 app.use(corsHeaders);
 
 app.use('/feed', feedRoutes);
